@@ -1,0 +1,29 @@
+# Local evidence and agent/runtime state
+.artifacts/
+.agents/
+.aws/
+.codex/
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*credentials*
+*token*
+
+# Caches, logs, editor and temporary files
+__pycache__/
+.cache/
+.mypy_cache/
+.pytest_cache/
+*.py[cod]
+*.log
+*.tmp
+*.swp
+*~
+.DS_Store
+tmp/
