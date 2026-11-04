@@ -1,0 +1,18 @@
+{
+  "legal_advice": false,
+  "required_files": [
+    "third-party/fprime/LICENSE.txt",
+    "third-party/fprime/NOTICE.txt",
+    "third-party/syft/LICENSE.txt",
+    "third-party/syft/NOTICE.md",
+    "third-party/spdx-spec/NOTICE.md",
+    "third-party/spdx-spec/LICENSE-URI.txt",
+    "LICENSE-SCOPE.md",
+    "REDISTRIBUTION.md"
+  ],
+  "status": "PASS",
+  "verified_third_party_hashes": {
+    "spdx_schema": "239208b7ac287b3cf5d9a9af23f9d69863971102a5e1587a27a398b43490b89b",
+    "syft_checksums": "a2db61bc71f8f7ea8c67fc4a81b8e4e6474386e6a07d104bd2e78e964d5d7ec7"
+  }
+}

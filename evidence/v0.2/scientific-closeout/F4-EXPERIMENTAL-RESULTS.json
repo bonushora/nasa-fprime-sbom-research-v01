@@ -1,0 +1,32 @@
+{
+  "project": "NASA F Prime SBOM research v0.2",
+  "revision": "F6-R6",
+  "scope": "Native CMake/Syft source-level SBOM mechanism via isolated minimal harness",
+  "status": "EXPERIMENTAL_EVIDENCE_REVIEWED",
+  "runs": {
+    "run-1": {"sha256": "0ad4ec43ad02d8f436679d9419a56842005b8beac2446aa5a8049e7d4596fc8b", "packages": 266, "files": 46, "relationships": 581},
+    "run-2": {"sha256": "6837b5a04ef2cdd64e60475c2d2bed5030eaa2e0aeda0dfa0c194bdb38a15c38", "packages": 266, "files": 46, "relationships": 581}
+  },
+  "full_document_recursive_diff": {
+    "differing_paths": ["/creationInfo/created", "/documentNamespace"],
+    "difference_count": 2,
+    "equal_after_normalizing_only_listed_paths": true
+  },
+  "historical_projection": {
+    "sha256": "1661858c7d6fb692b9408caaaf913d9a26c4f6ad947b90a01708f623dfb4bd8b",
+    "identical_between_runs": true,
+    "excluded_content": ["document metadata", "files collection"],
+    "package_key_collision_count": 27,
+    "package_occurrences_in_collisions": 170,
+    "claim_boundary": "Study-defined projection only; not a universal SPDX semantic digest."
+  },
+  "limitations": [
+    "No full F Prime deployment build was performed.",
+    "No binary, linkage, runtime, distribution, vulnerability, or completeness claim is made.",
+    "Cross-ecosystem name/version matching is not identity proof.",
+    "External independent reconstruction is NOT_VERIFIED.",
+    "No NASA, Caltech, or JPL review or endorsement is inferred."
+  ],
+  "publication_authorized": false
+}
+

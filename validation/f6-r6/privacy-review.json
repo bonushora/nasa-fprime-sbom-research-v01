@@ -1,0 +1,7 @@
+{
+  "expected_public_contact": "eay@cryptsoft.com in upstream F Prime NOTICE.txt",
+  "forbidden_pattern_findings": [],
+  "original_spdx_modified": false,
+  "preserved_original_spdx_source_path": "/input",
+  "status": "PASS"
+}

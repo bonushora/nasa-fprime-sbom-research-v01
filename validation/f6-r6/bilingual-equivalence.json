@@ -1,0 +1,59 @@
+{
+  "pair_results": [
+    {
+      "checked_invariants": [
+        "266",
+        "46",
+        "581",
+        "27",
+        "170",
+        "a4b1b1c043d1f9b51a7faba4a47d5d0f231910c7",
+        "6e00649fc2e2ae65f30086f059160865bdc49442",
+        "EXTERNAL_INDEPENDENT_REPRODUCTION=NOT_VERIFIED"
+      ],
+      "english": "README.md",
+      "missing": [],
+      "pt_br": "README.pt-BR.md"
+    },
+    {
+      "checked_invariants": [
+        "a4b1b1c043d1f9b51a7faba4a47d5d0f231910c7",
+        "EXTERNAL_INDEPENDENT_REPRODUCTION=NOT_VERIFIED"
+      ],
+      "english": "REPRODUCIBILITY.md",
+      "missing": [],
+      "pt_br": "REPRODUCIBILITY.pt-BR.md"
+    },
+    {
+      "checked_invariants": [],
+      "english": "RIGHTS-REVIEW.md",
+      "missing": [],
+      "pt_br": "RIGHTS-REVIEW.pt-BR.md"
+    },
+    {
+      "checked_invariants": [
+        "27",
+        "170"
+      ],
+      "english": "F6-R6-REVIEW.md",
+      "missing": [],
+      "pt_br": "F6-R6-REVIEW.pt-BR.md"
+    },
+    {
+      "checked_invariants": [
+        "266",
+        "46",
+        "581",
+        "27",
+        "170",
+        "a4b1b1c043d1f9b51a7faba4a47d5d0f231910c7",
+        "EXTERNAL_INDEPENDENT_REPRODUCTION=NOT_VERIFIED"
+      ],
+      "english": "docs/v0.2/RESEARCH-REPORT.md",
+      "missing": [],
+      "pt_br": "docs/v0.2/RESEARCH-REPORT.pt-BR.md"
+    }
+  ],
+  "scope": "machine parity of applicable numerical/hash/status invariants; substantive terminology review is in F6-R6-REVIEW.md",
+  "status": "PASS"
+}

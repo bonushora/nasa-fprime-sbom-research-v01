@@ -1,0 +1,45 @@
+{
+  "counts_per_run": {
+    "files": 46,
+    "packages": 266,
+    "relationships": 581
+  },
+  "equal_after_normalizing_only_declared_paths": true,
+  "external_independent_reproduction": "NOT_VERIFIED",
+  "full_document_difference_count": 2,
+  "full_document_differences": [
+    {
+      "kind": "value",
+      "left": "2026-11-04T15:18:32Z",
+      "path": "/creationInfo/created",
+      "right": "2026-11-04T15:18:45Z"
+    },
+    {
+      "kind": "value",
+      "left": "https://anchore.com/syft/dir/input-63b582b1-acb4-46c3-93d9-748f5438b16b",
+      "path": "/documentNamespace",
+      "right": "https://anchore.com/syft/dir/input-731ddca0-2db7-41de-bd85-8e11b3d3a865"
+    }
+  ],
+  "historical_projection_audit": {
+    "colliding_key_count": 27,
+    "conclusion": "Projection equality only; not universal SPDX semantic equivalence.",
+    "omits": [
+      "document metadata",
+      "files collection"
+    ],
+    "package_key_fields": [
+      "name",
+      "versionInfo",
+      "purl"
+    ],
+    "package_occurrences_in_collisions": 170,
+    "unique_keys_for_266_occurrences": 123
+  },
+  "method": "complete recursive comparison of parsed JSON values plus comparator-code audit",
+  "run_sha256": {
+    "run-1": "0ad4ec43ad02d8f436679d9419a56842005b8beac2446aa5a8049e7d4596fc8b",
+    "run-2": "6837b5a04ef2cdd64e60475c2d2bed5030eaa2e0aeda0dfa0c194bdb38a15c38"
+  },
+  "status": "PASS"
+}

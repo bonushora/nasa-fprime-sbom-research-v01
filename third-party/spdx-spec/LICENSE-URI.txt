@@ -1,0 +1,5 @@
+Creative Commons Attribution 3.0 Unported
+SPDX identifier: CC-BY-3.0
+License URI: https://creativecommons.org/licenses/by/3.0/
+Upstream license text: https://github.com/spdx/spdx-spec/blob/v2.3/LICENSE
+

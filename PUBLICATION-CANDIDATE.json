@@ -1,0 +1,29 @@
+{
+  "project": "NASA F Prime SBOM Research",
+  "candidate_version": "v0.2",
+  "candidate_revision": "F6-R6",
+  "publication_status": "LOCAL_CANDIDATE_FOR_HUMAN_DECISION",
+  "primary_language": "en",
+  "secondary_language": "pt-BR",
+  "author": "Thales Rangel",
+  "orcid": "0000-0002-0629-9731",
+  "upstream_commit": "a4b1b1c043d1f9b51a7faba4a47d5d0f231910c7",
+  "research_base_commit": "6e00649fc2e2ae65f30086f059160865bdc49442",
+  "r4_manifest_sha256": "5f3a398f5a776b17720d979781b232c95e118cfa876258dd0d2904bc877b7d88",
+  "historical_projection_sha256": "1661858c7d6fb692b9408caaaf913d9a26c4f6ad947b90a01708f623dfb4bd8b",
+  "doi": null,
+  "date_released": null,
+  "publication_authorized": false,
+  "external_independent_reproduction": "NOT_VERIFIED",
+  "original_materials_license": "Apache-2.0; scope defined in LICENSE-SCOPE.md",
+  "third_party_rights": "PRESERVED_SEPARATELY",
+  "gates": {
+    "SCIENTIFIC_REVIEW_GREEN": "PASS",
+    "BILINGUAL_EQUIVALENCE_GREEN": "PASS",
+    "CITATION_VALIDATION_GREEN": "PASS",
+    "RIGHTS_AND_REDISTRIBUTION_GREEN": "PASS",
+    "PUBLIC_PACKAGE_INTEGRITY_GREEN": "PASS",
+    "PUBLICATION_READINESS_GREEN": "PASS"
+  }
+}
+

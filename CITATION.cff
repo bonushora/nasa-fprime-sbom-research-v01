@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "Please cite this independent, unpublished experimental research using these metadata."
+type: software
+title: "Experimental Source-Level SPDX SBOM Generation in NASA F Prime: Local Repeatability and Coverage Boundaries"
+version: "0.2"
+abstract: "Independent local research candidate F6-R6. Two source-level SPDX runs are analyzed with explicit limits; external independent reproduction is not verified. NASA, Caltech, and JPL have not endorsed this work."
+authors:
+  - family-names: "Rangel"
+    given-names: "Thales"
+    orcid: "https://orcid.org/0000-0002-0629-9731"
+    affiliation: "Independent Researcher"
+repository-code: "https://github.com/bonushora/nasa-fprime-sbom-research-v01"
+keywords:
+  - "SBOM"
+  - "SPDX"
+  - "F Prime"
+  - "Syft"
+  - "reproducibility"
+

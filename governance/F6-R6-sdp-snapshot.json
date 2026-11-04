@@ -1,0 +1,67 @@
+{
+  "schema": "BH-SDP",
+  "schema_version": "2.3",
+  "snapshot_id": "nasa-fprime-sbom-v0.2-F6-R6",
+  "recorded_utc": "2026-11-04T16:33:01Z",
+  "phase": "F6",
+  "revision": "F6-R6",
+  "governance": {
+    "sep": "BH-SEP v2.3",
+    "sdp": "BH-SDP v2.3"
+  },
+  "inputs": {
+    "r4_candidate": ".artifacts/f6-publication-candidate-v0.2-r4",
+    "r4_manifest_sha256": "5f3a398f5a776b17720d979781b232c95e118cfa876258dd0d2904bc877b7d88",
+    "research_baseline": "6e00649fc2e2ae65f30086f059160865bdc49442",
+    "fprime_upstream": "a4b1b1c043d1f9b51a7faba4a47d5d0f231910c7"
+  },
+  "execution_boundary": {
+    "syft_rerun": false,
+    "cmake_rerun": false,
+    "original_spdx_modified": false,
+    "github_push": false,
+    "github_release": false,
+    "zenodo_publication": false,
+    "doi_creation": false,
+    "orcid_mutation": false
+  },
+  "scientific_review": {
+    "full_document_difference_count": 2,
+    "differing_paths": ["/creationInfo/created", "/documentNamespace"],
+    "equal_after_two_field_normalization": true,
+    "historical_projection_scope": "package/relationship projection only",
+    "historical_projection_colliding_keys": 27,
+    "historical_projection_occurrences_in_collisions": 170,
+    "external_independent_reproduction": "NOT_VERIFIED"
+  },
+  "rights": {
+    "original_material_scope": "Apache-2.0 as defined by LICENSE-SCOPE.md",
+    "fprime": "upstream Apache-2.0 license and NOTICE preserved",
+    "syft_checksum_asset": "Syft Apache-2.0 license and notice preserved separately",
+    "spdx_schema": "CC-BY-3.0 attribution and license URI preserved separately",
+    "generated_spdx_data_license": "CC0-1.0 as embedded",
+    "legal_advice": false
+  },
+  "validation": {
+    "scientific": "validation/f6-r6/scientific-review.json",
+    "bilingual": "validation/f6-r6/bilingual-equivalence.json",
+    "citation": "validation/f6-r6/citation-validation.json",
+    "rights": "validation/f6-r6/rights-and-redistribution.json",
+    "privacy": "validation/f6-r6/privacy-review.json"
+  },
+  "gates": {
+    "SCIENTIFIC_REVIEW_GREEN": "PASS",
+    "BILINGUAL_EQUIVALENCE_GREEN": "PASS",
+    "CITATION_VALIDATION_GREEN": "PASS",
+    "RIGHTS_AND_REDISTRIBUTION_GREEN": "PASS",
+    "PUBLIC_PACKAGE_INTEGRITY_GREEN": "PASS",
+    "PUBLICATION_READINESS_GREEN": "PASS"
+  },
+  "publication": {
+    "status": "LOCAL_CANDIDATE_FOR_HUMAN_DECISION",
+    "authorized": false,
+    "doi": null,
+    "date_released": null
+  }
+}
+

@@ -1,0 +1,64 @@
+{
+  "cargo_lock_not_detected": [],
+  "classification_model": {
+    "compiled": "NOT_MEASURED: the research harness invokes the native source SBOM target without compiling F Prime.",
+    "declared": "Pinned Python requirements and GitHub Action uses parsed independently from source declarations.",
+    "detected": "Unique name/version pairs emitted as packages by the native Syft SPDX.",
+    "distributed": "NOT_MEASURED: no flight binary, release bundle, or production installation was built.",
+    "resolved": "Cargo.lock package name/version entries parsed independently."
+  },
+  "cmake_registration_calls": {
+    "deployment": 4,
+    "library": 46,
+    "module": 184
+  },
+  "counts": {
+    "declared_unique": 115,
+    "github_actions_unique": 35,
+    "native_detected_unique_name_version": 123,
+    "python_requirements_unique": 80,
+    "resolved_cargo_lock_unique": 4
+  },
+  "github_actions_not_detected": [
+    {
+      "name": "advanced-security/filter-sarif",
+      "version": "2da736ff05ef065cb2894ac6892e47b5eac2c3c0"
+    },
+    {
+      "name": "gaurav-nelson/github-action-markdown-link-check",
+      "version": "5c5dfc0ac2e225883c0e5f03a85311ec2830d368"
+    }
+  ],
+  "interpretation_limits": [
+    "Set differences may reflect ecosystem normalization, conditional markers, local/root packages, or cataloger scope.",
+    "Agreement establishes only agreement for the selected declaration classes; it is not proof of completeness.",
+    "CMake registration calls are source declarations, not a configured, compiled, linked, or distributed graph."
+  ],
+  "native_detected_not_in_selected_declaration_sets": [
+    {
+      "name": "-/-github/workflows/reusable-get-pr-branch-yml",
+      "version": "UNKNOWN"
+    },
+    {
+      "name": "-/-github/workflows/reusable-project-builder-yml",
+      "version": "UNKNOWN"
+    },
+    {
+      "name": "-/-github/workflows/reusable-project-ci-yml",
+      "version": "UNKNOWN"
+    },
+    {
+      "name": "/input",
+      "version": ""
+    },
+    {
+      "name": "advanced-security/filter-sarif",
+      "version": "v1.1"
+    },
+    {
+      "name": "gaurav-nelson/github-action-markdown-link-check",
+      "version": "v1"
+    }
+  ],
+  "python_requirements_not_detected": []
+}

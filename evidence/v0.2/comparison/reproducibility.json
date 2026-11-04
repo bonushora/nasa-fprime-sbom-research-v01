@@ -1,0 +1,20 @@
+{
+  "byte_identical": false,
+  "classification": "VOLATILE_ONLY",
+  "normalization_scope": [
+    "document creation timestamp",
+    "document namespace",
+    "SPDX element IDs mapped to stable package name/version/PURL keys for relationships"
+  ],
+  "packages_only_run_1": [],
+  "packages_only_run_2": [],
+  "run_1_created": "2026-11-04T15:18:32Z",
+  "run_1_namespace": "https://anchore.com/syft/dir/input-63b582b1-acb4-46c3-93d9-748f5438b16b",
+  "run_1_sha256": "0ad4ec43ad02d8f436679d9419a56842005b8beac2446aa5a8049e7d4596fc8b",
+  "run_2_created": "2026-11-04T15:18:45Z",
+  "run_2_namespace": "https://anchore.com/syft/dir/input-731ddca0-2db7-41de-bd85-8e11b3d3a865",
+  "run_2_sha256": "6837b5a04ef2cdd64e60475c2d2bed5030eaa2e0aeda0dfa0c194bdb38a15c38",
+  "semantic_identical": true,
+  "semantic_sha256_run_1": "1661858c7d6fb692b9408caaaf913d9a26c4f6ad947b90a01708f623dfb4bd8b",
+  "semantic_sha256_run_2": "1661858c7d6fb692b9408caaaf913d9a26c4f6ad947b90a01708f623dfb4bd8b"
+}

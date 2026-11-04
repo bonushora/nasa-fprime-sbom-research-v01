@@ -1,0 +1,11 @@
+{
+  "cff_version": "1.2.0",
+  "date_released_present": false,
+  "doi_present": false,
+  "package_wide_license_present": false,
+  "schema_sha256": "0b8d22140da702d766df318dcff3a91af2f39521298dcf36d76315fd99cc169b",
+  "schema_url": "https://raw.githubusercontent.com/citation-file-format/citation-file-format/1.2.0/schema.json",
+  "status": "PASS",
+  "validator": "python-jsonschema 3.2.0 Draft7Validator with format checking",
+  "yaml_parser": "PyYAML 5.4.1"
+}
