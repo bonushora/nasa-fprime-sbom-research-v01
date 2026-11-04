@@ -1,88 +1,100 @@
-# F0 — Mecanismo nativo CMake/Syft
+# F0 — Native CMake/Syft mechanism
 
-## Resumo
+## Summary
 
-O mecanismo observado integra Syft como um custom target CMake global e opcional. Se `find_program` localizar `syft`, o target participa de `ALL`, espera os targets registrados em `SBOM_DEPENDENCIES`, varre o diretório `FPRIME_PROJECT_ROOT`, emite SPDX JSON em stdout, grava o resultado no build tree por meio de `redirector.py` e aciona a instalação do componente. Se Syft não for localizado, o código apenas registra uma mensagem informativa e não cria o target observado.
+The observed mechanism integrates Syft as an optional global CMake custom target. If `find_program` locates `syft`, the target participates in `ALL`, waits for the targets registered in `SBOM_DEPENDENCIES`, scans the `FPRIME_PROJECT_ROOT` directory, emits SPDX JSON to stdout, writes the result into the build tree through `redirector.py`, and triggers component installation. If Syft is not found, the code only records an informational message and does not create the observed target.
 
-Fonte principal inicial: [nasa/fprime `sbom.cmake` em `devel`](https://github.com/nasa/fprime/blob/devel/cmake/target/sbom.cmake). Em F0-R1B, o mesmo conteúdo foi confirmado nos bytes do pacote com Git blob OID `f298b0f19dc2c5febcb9d9f72f474e2b2561b1b3` e SHA-256 `aa720bb92c6f3a4525770b59a0c35830d35975f49b9cbb38096669c2643b9eae`. O vínculo desse blob ao path/tree do commit candidato ainda não foi comprovado localmente.
+Initial primary source: [nasa/fprime `sbom.cmake` on `devel`](https://github.com/nasa/fprime/blob/devel/cmake/target/sbom.cmake). In F0-R1B, the content was confirmed against the blob. In F0-R1D, the commit→tree→path→blob binding was proven in the physical Git pack for commit `a4b1b1c043d1f9b51a7faba4a47d5d0f231910c7`.
 
-## Fluxo observado
+## Observed flow
 
-1. `FPRIME__INTERNAL_SBOM_REDIRECTOR` aponta para `tools/redirector.py` e é colocado no cache interno CMake.
-2. `sbom_add_global_target(TARGET)` procura um executável chamado `syft` no ambiente de configuração.
-3. Quando encontrado, `add_custom_target("${TARGET}" ALL ...)` torna a geração parte do build padrão.
-4. O comando chama `${PYTHON}`, o redirector e o caminho de saída `${CMAKE_BINARY_DIR}/${PROJECT_NAME}_sbom.json`.
-5. O redirector executa `"${SYFT}" "dir:${FPRIME_PROJECT_ROOT}" -o spdx-json --exclude '*/**/.github'` sem shell e envia stdout ao arquivo.
-6. `DEPENDS $<TARGET_PROPERTY:${TARGET},SBOM_DEPENDENCIES>` introduz dependências de build acumuladas no target global.
-7. Uma regra `install(FILES ...)` associa o JSON ao componente `${TARGET}` e ao destino `${TOOLCHAIN_NAME}`.
-8. Um comando `POST_BUILD` invoca CMake em modo script para instalar o componente por `fprime_install.cmake`, passando o componente, destino de instalação e build dir no conteúdo visível mais recente da página.
+1. `FPRIME__INTERNAL_SBOM_REDIRECTOR` points to `tools/redirector.py` and is placed in the internal CMake cache.
+2. `sbom_add_global_target(TARGET)` searches the configuration environment for an executable named `syft`.
+3. When found, `add_custom_target("${TARGET}" ALL ...)` makes generation part of the default build.
+4. The command invokes `${PYTHON}`, the redirector, and output path `${CMAKE_BINARY_DIR}/${PROJECT_NAME}_sbom.json`.
+5. The redirector executes `"${SYFT}" "dir:${FPRIME_PROJECT_ROOT}" -o spdx-json --exclude '*/**/.github'` without a shell and sends stdout to the file.
+6. `DEPENDS $<TARGET_PROPERTY:${TARGET},SBOM_DEPENDENCIES>` introduces build dependencies accumulated on the global target.
+7. An `install(FILES ...)` rule associates the JSON with component `${TARGET}` and destination `${TOOLCHAIN_NAME}`.
+8. A `POST_BUILD` command invokes CMake in script mode to install the component through `fprime_install.cmake`, passing the component, installation destination, and build directory in the most recently visible page content.
 
-## Entradas e saídas
+## Inputs and outputs
 
-| Tipo | Elemento | Observação |
+| Type | Element | Observation |
 |---|---|---|
-| entrada | `TARGET` | nome do custom target e do componente de instalação |
-| entrada | `PATH` | escolhe o executável `syft`; não há versão fixada |
-| entrada | `${PYTHON}` | interpretador usado para o redirector |
-| entrada | `FPRIME_PROJECT_ROOT` | raiz inteira passada ao source `dir:` do Syft |
-| entrada | configuração/ambiente Syft | não neutralizados pelo comando observado |
-| entrada | `SBOM_DEPENDENCIES` | ordena o target depois dos targets CMake registrados |
-| saída | `${CMAKE_BINARY_DIR}/${PROJECT_NAME}_sbom.json` | stdout de Syft em formato `spdx-json` |
-| saída | `${FPRIME_INSTALL_DEST}` / `${TOOLCHAIN_NAME}` | cópia instalada, caminho final dependente do wrapper/variáveis |
+| input | `TARGET` | name of the custom target and installation component |
+| input | `PATH` | selects the `syft` executable; no version is pinned |
+| input | `${PYTHON}` | interpreter used for the redirector |
+| input | `FPRIME_PROJECT_ROOT` | entire root passed to Syft's `dir:` source |
+| input | Syft configuration/environment | not neutralized by the observed command |
+| input | `SBOM_DEPENDENCIES` | orders the target after the registered CMake targets |
+| output | `${CMAKE_BINARY_DIR}/${PROJECT_NAME}_sbom.json` | Syft stdout in `spdx-json` format |
+| output | `${FPRIME_INSTALL_DEST}` / `${TOOLCHAIN_NAME}` | installed copy; final path depends on wrapper/variables |
 
-## Hooks de deployment e módulo
+## Deployment and module hooks
 
-`sbom_add_deployment_target(MODULE TARGET SOURCES DEPENDENCIES FULL_DEPENDENCIES)` e `sbom_add_module_target(MODULE TARGET SOURCE_FILES DEPENDENCIES)` verificam se `TARGET` existe e, nesse caso, acrescentam `MODULE` à propriedade `SBOM_DEPENDENCIES` do target indicado, via `append_list_property`.
+`sbom_add_deployment_target(MODULE TARGET SOURCES DEPENDENCIES FULL_DEPENDENCIES)` and `sbom_add_module_target(MODULE TARGET SOURCE_FILES DEPENDENCIES)` check whether `TARGET` exists and, if so, append `MODULE` to the specified target's `SBOM_DEPENDENCIES` property through `append_list_property`.
 
-Fatos importantes:
+Important facts:
 
-- Os parâmetros `SOURCES`, `SOURCE_FILES`, `DEPENDENCIES` e `FULL_DEPENDENCIES` não são usados no corpo observado desses hooks.
-- O efeito demonstrado é dependência/ordenação de targets CMake, não transmissão de um grafo de componentes ao Syft.
-- Os call sites fora do arquivo e o nome concreto do target global não foram recuperados com evidência congelada nesta F0. Sua enumeração permanece `UNKNOWN`.
+- The `SOURCES`, `SOURCE_FILES`, `DEPENDENCIES`, and `FULL_DEPENDENCIES` parameters are not used in the observed bodies of these hooks.
+- The demonstrated effect is CMake target dependency/ordering, not transmission of a component graph to Syft.
+- During initial F0, call sites outside the file and the concrete global target name had not been retrieved with frozen evidence and remained `UNKNOWN`; F0-R1D later resolved this within the recorded superproject scope.
 
-## Cadeia CMake — reconciliação F0-R1B
+## CMake chain — F0-R1B reconciliation
 
-Confirmado diretamente nos bytes verificados de `sbom.cmake`:
+Confirmed directly in the verified bytes of `sbom.cmake`:
 
-- definições de `sbom_add_global_target`, `sbom_add_deployment_target` e `sbom_add_module_target`;
-- o target global `ALL`, sua dependência em `SBOM_DEPENDENCIES`, o argv do Syft e a instalação pós-build;
-- hooks de módulo/deployment que acrescentam o módulo à propriedade do target, sem consumir os argumentos de dependências recebidos.
+- definitions of `sbom_add_global_target`, `sbom_add_deployment_target`, and `sbom_add_module_target`;
+- the global `ALL` target, its dependency on `SBOM_DEPENDENCIES`, the Syft argv, and post-build installation;
+- module/deployment hooks that append the module to the target property without consuming the supplied dependency arguments.
 
-Declarado pelo manifesto, mas não confirmado por bytes presentes no pacote:
+Declared by the manifest but not confirmed from bytes present in the package:
 
-- `cmake/FPrime.cmake:121` chamaria `register_fprime_target(target/sbom)`;
-- `cmake/target/target.cmake:96-97` faria include/dispatch global;
-- o mesmo dispatcher chamaria os hooks de módulo na linha 121 e deployment na linha 140.
+- `cmake/FPrime.cmake:121` would call `register_fprime_target(target/sbom)`;
+- `cmake/target/target.cmake:96-97` would perform global include/dispatch;
+- the same dispatcher would call the module hook at line 121 and the deployment hook at line 140.
 
-Essa cadeia continua `PARTIAL`: `FPrime.cmake` e `target.cmake` não estão no pacote, não há tree/archive completo para busca congelada e o próprio manifesto classifica a enumeração como não exaustiva. Portanto, os pontos de registro/dispatch são evidência declaratória do pacote, não observação local do upstream.
+At F0-R1B, this chain remained `PARTIAL`: `FPrime.cmake` and `target.cmake` were not in the package, there was no complete tree/archive for a frozen search, and the manifest itself classified the enumeration as non-exhaustive. Registration/dispatch points were therefore declarative package evidence at that revision, not local upstream observations.
 
-## Escopo da varredura e exclusões
+## CMake chain — F0-R1D closure
 
-O source de Syft é explicitamente um diretório: `dir:${FPRIME_PROJECT_ROOT}`. Isso aponta para a árvore do projeto, não para o build dir nem para o diretório de instalação. A única exclusão explícita observada é `*/**/.github`. O comentário upstream diz que a intenção é excluir `.github` fora da raiz; a semântica exata do glob depende da versão do Syft e não foi executada nesta fase.
+The R1C evidence confirms the complete chain in the tracked superproject tree:
 
-Inferência: build products fora de `FPRIME_PROJECT_ROOT`, sysroots, pacotes do host e dependências apenas linkadas externamente não entram no universo de arquivos desse source. A dependência CMake faz a varredura ocorrer depois de targets registrados, mas não expande o diretório varrido.
+1. `cmake/FPrime.cmake:121` registers `target/sbom` through `register_fprime_target`.
+2. `cmake/API.cmake:636-638` appends the target to `FPRIME_TARGET_LIST` through `register_fprime_list_helper`.
+3. `cmake/target/target.cmake:37-44` iterates over that list and calls `setup_global_target`.
+4. `target.cmake:96-97` includes the plugin, derives the name `sbom`, and dynamically calls `sbom_add_global_target`.
+5. `target.cmake:154-181` iterates over the same list for each build target; `setup_single_target` dynamically calls `sbom_add_module_target` at line 121 or `sbom_add_deployment_target` at line 140.
+6. `sbom.cmake` defines the three functions and uses `SBOM_DEPENDENCIES` to order the global target after registered modules/deployments.
 
-## Release, plataforma e deployment
+The literal search `target/sbom|sbom_add_|SBOM_DEPENDENCIES` returned exactly nine matches across the tracked tree: 1 registration, 2 documentary comments, 3 definitions, 1 property read, and 2 property writes. The dispatches do not appear among those nine matches because they are dynamic calls; they were confirmed separately at the same commit. The search covers the superproject and does not traverse the `googletest` gitlink. Result: `CMAKE_CHAIN=PASS` within that boundary.
 
-| Dimensão | Vínculo observado |
+## Scan scope and exclusions
+
+The Syft source is explicitly a directory: `dir:${FPRIME_PROJECT_ROOT}`. This points to the project tree, not the build directory or installation directory. The only observed explicit exclusion is `*/**/.github`. The upstream comment states that the intent is to exclude `.github` outside the root; the exact glob semantics depend on the Syft version and were not executed in this phase.
+
+Inference: build products outside `FPRIME_PROJECT_ROOT`, sysroots, host packages, and dependencies that are only linked externally do not enter this source's file universe. The CMake dependency causes the scan to occur after registered targets, but does not expand the scanned directory.
+
+## Release, platform, and deployment
+
+| Dimension | Observed binding |
 |---|---|
-| release/tag | nenhum argumento de release, tag ou commit passado ao Syft |
-| commit | nenhum OID passado ao Syft ou gravado explicitamente pelo CMake observado |
-| plataforma/toolchain | `${TOOLCHAIN_NAME}` afeta o destino de instalação; não foi visto como metadado do comando Syft |
-| deployment | deployments podem participar da ordenação; não há source ou arquivo separado por deployment no trecho observado |
-| projeto | `${PROJECT_NAME}` compõe o nome do arquivo |
+| release/tag | no release, tag, or commit argument is passed to Syft |
+| commit | no OID is passed to Syft or explicitly recorded by the observed CMake |
+| platform/toolchain | `${TOOLCHAIN_NAME}` affects the installation destination; it was not observed as Syft command metadata |
+| deployment | deployments may participate in ordering; no separate source or file per deployment appears in the observed excerpt |
+| project | `${PROJECT_NAME}` forms part of the file name |
 
-Conclusão: não foi observado vínculo verificável entre o JSON gerado e uma release imutável. Qualquer metadado que Syft derive por conta própria não substitui uma amarração explícita e atestada no mecanismo CMake.
+Conclusion: no verifiable binding between the generated JSON and an immutable release was observed. Any metadata Syft might derive on its own does not replace an explicit, attested binding in the CMake mechanism.
 
-## Papel de `redirector.py`
+## Role of `redirector.py`
 
-Fonte: [nasa/fprime `redirector.py` em `devel`](https://github.com/nasa/fprime/blob/devel/cmake/target/tools/redirector.py).
+Source: [nasa/fprime `redirector.py` on `devel`](https://github.com/nasa/fprime/blob/devel/cmake/target/tools/redirector.py).
 
-O helper valida apenas que recebeu ao menos um argumento após o nome do programa, abre o primeiro argumento em modo `w`, executa o restante com `subprocess.run(..., stdout=file_handle)` e devolve o return code do subprocesso. Não usa shell, não valida o JSON, não captura stderr, não torna a gravação atômica e trunca um arquivo preexistente antes de saber se Syft terá sucesso.
+The helper only validates that it received at least one argument after the program name, opens the first argument in `w` mode, executes the remainder with `subprocess.run(..., stdout=file_handle)`, and returns the subprocess return code. It does not use a shell, validate the JSON, capture stderr, make the write atomic, or avoid truncating an existing file before Syft is known to have succeeded.
 
-## Limitações desta caracterização
+## Limitations of this characterization
 
-- Commit e hashes upstream não verificados.
-- Call sites das três funções não enumerados de forma completa.
-- Versão mínima/máxima de Syft e versão SPDX efetiva não fixadas no comando.
-- Nenhuma execução confirmou glob, conteúdo, falhas ou caminho final instalado.
+- Commit identity, upstream hashes, and complete call-site enumeration were initial limitations that F0-R1D resolved within the tracked superproject tree, excluding submodules.
+- The minimum/maximum Syft version and the effective SPDX version are not pinned by the command.
+- No execution confirmed the glob semantics, output content, failure behavior, or final installed path.

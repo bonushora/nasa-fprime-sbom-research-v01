@@ -1,49 +1,49 @@
-# F0 — Matriz de aceitação
+# F0 — Acceptance matrix
 
-## Decisão
+## Decision
 
-`F0_DOCUMENTATION_GREEN=BLOCKED`
+`F0_DOCUMENTATION_GREEN=PASS`
 
-O workspace e a documentação foram materializados, mas o gate obrigatório de identidade upstream não foi satisfeito. O resultado não é promovido a `PASS` pela mera existência dos arquivos.
+The workspace, upstream identity, CMake chain, risk boundaries, coverage matrix, independent plan, and snapshot were verified. The promotion is exclusively documentary and does not change the generation or qualification gates.
 
-| ID | Critério | Evidência | Resultado |
+| ID | Criterion | Evidence | Result |
 |---|---|---|---|
-| F0-01 | workspace documental existe | nove artefatos requeridos no workspace autorizado | `PASS` |
-| F0-02 | identidade upstream verificada e registrada | bytes/hashes do pacote confirmados; commit/tree/path→blob ainda sem prova autocontida | `BLOCKED` |
-| F0-03 | integração CMake/Syft caracterizada | definições e comportamento confirmados; registro/dispatch apenas declarados e enumeração não exaustiva | `PARTIAL` |
-| F0-04 | risco de execução delimitado | entradas, ferramentas, efeitos, host, rede/cache e isolamento documentados | `PASS` |
-| F0-05 | matriz explicita conhecido/desconhecido | matriz por classe com gaps e condições | `PASS` |
-| F0-06 | plano de comparação independente | conjuntos, precondições, métricas e stop rules | `PASS` |
-| F0-07 | documentos inspecionados e validados | validações locais de arquivos, JSON, links/campos e hashes documentais | `PASS` |
-| F0-08 | snapshot BH-SDP v2.3 consistente | `governance/F0-sdp-snapshot.json` válido e alinhado aos gates | `PASS` |
+| F0-01 | documentary workspace exists | nine required artifacts in the authorized workspace | `PASS` |
+| F0-02 | upstream identity verified and recorded | commit, tree, five paths/blobs, sizes, and SHA-256 values confirmed in the Git pack | `PASS` |
+| F0-03 | CMake/Syft integration characterized | registration, dynamic dispatch, three definitions, and nine matches classified at the same commit | `PASS` |
+| F0-04 | execution risk bounded | inputs, tools, effects, host, network/cache, and isolation documented | `PASS` |
+| F0-05 | matrix identifies knowns/unknowns | class-based matrix with gaps and conditions | `PASS` |
+| F0-06 | independent comparison plan | sets, preconditions, metrics, and stop rules | `PASS` |
+| F0-07 | documents inspected and validated | local checks of files, JSON, links/fields, and documentary hashes | `PASS` |
+| F0-08 | BH-SDP v2.3 snapshot consistent | valid `governance/F0-sdp-snapshot.json` aligned with the gates | `PASS` |
 
-## Gates operacionais
+## Operational gates
 
-| Gate | Resultado | Motivo |
+| Gate | Result | Rationale |
 |---|---|---|
-| upstream ref resolution | `FAIL/BLOCKED` | commit candidato externo não revalidado contra `devel` |
-| evidence package integrity | `PASS` | tamanhos, SHA-256 e Git blob OIDs coincidem |
-| immutable source bytes | `PASS_WITH_LIMITS` | bytes locais confirmados; proveniência tree/path não confirmada |
-| static source read | `PASS_WITH_LIMITS` | arquivos principais visíveis em fonte oficial cacheada |
-| upstream tree binding | `FAIL/BLOCKED` | pacote não contém prova completa dos objetos tree |
-| mechanism characterization | `PARTIAL` | mecanismo interno confirmado; registro/dispatch e call sites incompletos |
-| risk boundary | `PASS` | nenhuma execução necessária para delimitação |
-| local artifact set | `PASS` | conjunto requerido presente |
-| JSON syntax | `PASS` | validação local prevista/executada antes da entrega |
-| forbidden execution | `PASS` | build/Syft/testes/scripts/instalação não executados |
+| upstream fixed commit | `PASS` | commit object and root tree verified offline |
+| evidence package integrity | `PASS` | sizes, SHA-256 values, and Git blob OIDs match |
+| immutable source bytes | `PASS` | five blobs and transported copies are identical |
+| upstream tree binding | `PASS` | five paths resolved by the commit tree |
+| call-site inventory | `PASS` | nine matches reproduced in the tracked superproject tree |
+| mechanism characterization | `PASS` | registration chain and dynamic dispatch confirmed |
+| risk boundary | `PASS` | no execution required to establish the boundary |
+| local artifact set | `PASS` | required set present |
+| JSON syntax | `PASS` | local validation planned/executed before delivery |
+| forbidden execution | `PASS` | build/Syft/tests/scripts/installation not executed |
 
-## Estados independentes
+## Independent states
 
-- `F0_DOCUMENTATION_GREEN=BLOCKED`
+- `F0_DOCUMENTATION_GREEN=PASS`
 - `SBOM_GENERATION_GREEN=NÃO_EXECUTADO`
 - `SECURITY_QUALIFICATION_GREEN=NÃO_EXECUTADO`
 - `GLOBAL_GREEN=NOT_DECLARED`
 
-## Lacunas que impedem PASS
+## Limits preserved after PASS
 
-1. Verificação oficial/local de que o commit candidato corresponde à branch observada.
-2. Verificação commit→tree→path→blob para os três OIDs fornecidos.
-3. Bytes verificáveis de `cmake/FPrime.cmake` e `cmake/target/target.cmake` na mesma revisão.
-4. Enumeração completa dos call sites das funções `sbom_add_*` no mesmo commit.
+1. Enumeration covers the tracked superproject tree and does not traverse the `googletest` submodule.
+2. No SBOM was generated or compared through execution.
+3. No official release/signature was qualified by this phase.
+4. Coverage fields marked `UNKNOWN` remain unknown until an authorized executable phase.
 
-Essas lacunas exigem nova leitura oficial; não exigem nem autorizam build ou geração de SBOM.
+These limits do not block F0 documentary closure, but prevent any promotion of the generation, security, or global-green gates.

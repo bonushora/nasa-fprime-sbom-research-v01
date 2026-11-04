@@ -1,43 +1,47 @@
 # NASA F´ SBOM Research v0.1 — F0
 
-Baseline documental independente e não qualificada sobre o mecanismo nativo de geração de SBOM do NASA F´ (F Prime).
+Independent, unqualified documentary baseline for the native SBOM generation mechanism in NASA F´ (F Prime).
 
-## Resultado desta fase
+## Phase outcome
 
-| Gate | Estado |
+| Gate | Status |
 |---|---|
-| `F0_DOCUMENTATION_GREEN` | `BLOCKED` |
+| `F0_DOCUMENTATION_GREEN` | `PASS` |
 | `SBOM_GENERATION_GREEN` | `NÃO_EXECUTADO` |
 | `SECURITY_QUALIFICATION_GREEN` | `NÃO_EXECUTADO` |
 
-O bloqueio de F0 é estrito: em 2026-11-03 a leitura remota permitiu observar arquivos oficiais na branch móvel `devel`, mas não permitiu resolver e verificar o commit completo que ela apontava. O acesso Git local falhou por resolução DNS e a API oficial não ficou disponível pelo canal de leitura. Portanto, não existe baseline upstream congelada, e nenhum valor foi presumido.
+The initial F0 block was strict: on 2026-11-03, remote read access made it possible to observe official files on the moving `devel` branch, but not to resolve and verify the full commit to which it pointed. Local Git access failed because of DNS resolution, and the official API was unavailable through the read channel. Therefore, no upstream baseline had been frozen at that point, and no value was assumed.
 
-### Revisão F0-R1 — recuperação de identidade
+### F0-R1 revision — identity recovery
 
-Uma consulta externa independente forneceu o commit candidato `a4b1b1c043d1f9b51a7faba4a47d5d0f231910c7` e três Git blob OIDs. A tentativa local de revalidação em `2026-11-03T23:53:10-03:00` voltou a falhar por DNS no shell; commit, API, tree, raw e páginas imutáveis também não ficaram disponíveis pelo canal de leitura. Os identificadores foram preservados como evidência externa não revalidada, sem alterar o gate `BLOCKED`. Os SHA-256 documentais anteriores foram preservados no snapshot BH-SDP.
+An independent external query provided candidate commit `a4b1b1c043d1f9b51a7faba4a47d5d0f231910c7` and three Git blob OIDs. A local revalidation attempt at `2026-11-03T23:53:10-03:00` again failed because of DNS in the shell; the commit, API, tree, raw content, and immutable pages were also unavailable through the read channel. The identifiers were preserved as externally supplied, locally unverified evidence without changing the `BLOCKED` gate. The previous documentary SHA-256 values were preserved in the BH-SDP snapshot.
 
-### Revisão F0-R1B — evidence bridge
+### F0-R1B revision — evidence bridge
 
-O pacote local `.artifacts/f0-r1b-evidence/FPRIME-SBOM-F0-R1B-EVIDENCE-v01/` foi inspecionado sem executar seu verificador ou qualquer arquivo upstream. Os três arquivos transportados passaram em tamanho, SHA-256 e Git blob OID, inclusive por cálculo independente da fórmula Git blob. Isso fecha a integridade interna dos bytes do pacote, mas não fecha a identidade upstream: o pacote declara que não contém prova autocontida da tree, e não inclui `cmake/FPrime.cmake` nem `cmake/target/target.cmake` para confirmar localmente os pontos de registro/dispatch. O gate permanece `BLOCKED`.
+The local package `.artifacts/f0-r1b-evidence/FPRIME-SBOM-F0-R1B-EVIDENCE-v01/` was inspected without running its verifier or any upstream file. The three transported files passed size, SHA-256, and Git blob OID checks, including an independent calculation using the Git blob formula. This established the internal integrity of the package bytes, but did not establish upstream identity: the package states that it does not contain self-contained tree proof, and it omits `cmake/FPrime.cmake` and `cmake/target/target.cmake`, which were needed to confirm the registration and dispatch points locally. The gate remained `BLOCKED`.
 
-Ainda assim, a fase produziu uma caracterização estática útil e rastreável. O código observado cria condicionalmente um target CMake `ALL`, chama Syft sobre `FPRIME_PROJECT_ROOT`, solicita `spdx-json`, exclui caminhos `.github` aninhados segundo o argumento observado, redireciona stdout para um arquivo no build tree e instala esse arquivo sob o diretório da toolchain. Isso não demonstra completude, autenticidade de release ou qualificação de segurança.
+### F0-R1D revision — documentary closure
 
-## Artefatos
+The physical R1C evidence closed the previous gaps: commit object `a4b1b1c043d1f9b51a7faba4a47d5d0f231910c7`, its root tree `af4e2084aa84d51e82949c42f116d91301f65d81`, five path-to-blob bindings, and their SHA-256 values were revalidated directly from an offline Git pack. Enumeration reproduced exactly nine literal matches in the tracked superproject tree, and the dynamic registration/dispatch chain was confirmed in the Git objects. The search did not traverse the sole gitlink, `googletest`. With F0-01 through F0-08 satisfied, `F0_DOCUMENTATION_GREEN=PASS`; this does not promote SBOM generation, security qualification, or `GLOBAL_GREEN`.
 
-- [Escopo e fronteiras](docs/F0-scope-and-boundaries.md)
-- [Identidade upstream](docs/F0-upstream-identity.md)
-- [Mecanismo nativo](docs/F0-native-sbom-mechanism.md)
-- [Risco de execução Syft](docs/F0-syft-execution-risk.md)
-- [Matriz de cobertura](docs/F0-dependency-coverage-matrix.md)
-- [Plano de comparação independente](docs/F0-independent-comparison-plan.md)
-- [Matriz de aceitação](docs/F0-acceptance-matrix.md)
-- [Snapshot BH-SDP v2.3](governance/F0-sdp-snapshot.json)
+Even before closure, the phase produced a useful and traceable static characterization. The observed code conditionally creates a CMake `ALL` target, invokes Syft on `FPRIME_PROJECT_ROOT`, requests `spdx-json`, excludes nested `.github` paths according to the observed argument, redirects stdout to a file in the build tree, and installs that file under the toolchain directory. This does not demonstrate completeness, release authenticity, or security qualification.
 
-## Convenções de evidência
+## Artifacts
 
-- **Fato observado:** suportado diretamente por conteúdo lido ou por resultado local registrado.
-- **Inferência:** consequência técnica do código observado, explicitamente marcada.
-- **Hipótese:** proposição a testar em fase futura.
-- **Desconhecido/limitação:** informação não demonstrada nesta fase.
+- [Scope and boundaries](docs/F0-scope-and-boundaries.md)
+- [Upstream identity](docs/F0-upstream-identity.md)
+- [Native mechanism](docs/F0-native-sbom-mechanism.md)
+- [Syft execution risk](docs/F0-syft-execution-risk.md)
+- [Coverage matrix](docs/F0-dependency-coverage-matrix.md)
+- [Independent comparison plan](docs/F0-independent-comparison-plan.md)
+- [Acceptance matrix](docs/F0-acceptance-matrix.md)
+- [BH-SDP v2.3 snapshot](governance/F0-sdp-snapshot.json)
 
-Nenhum build, script upstream, teste, Syft ou instalador foi executado. Nenhum repositório upstream ou pesquisa cFS foi modificado.
+## Evidence conventions
+
+- **Observed fact:** directly supported by read content or a recorded local result.
+- **Inference:** a technical consequence of the observed code, explicitly marked as such.
+- **Hypothesis:** a proposition to be tested in a future phase.
+- **Unknown/limitation:** information not demonstrated in this phase.
+
+No build, upstream script, test, Syft invocation, or installer was executed. No upstream repository or cFS research project was modified.

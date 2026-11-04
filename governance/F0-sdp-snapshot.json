@@ -3,15 +3,15 @@
   "schema_version": "2.3",
   "snapshot_id": "nasa-fprime-sbom-research-v01-F0",
   "phase": "F0",
-  "revision": "F0-R1B",
+  "revision": "F0-R1D-EN",
   "observed_at": {
     "local": "2026-11-03T23:43:03-03:00",
     "utc": "2026-11-04T02:43:03Z",
     "timezone": "America/Sao_Paulo"
   },
   "revised_at": {
-    "local": "2026-11-04T00:03:57-03:00",
-    "utc": "2026-11-04T03:03:57Z",
+    "local": "2026-11-04T01:26:53-03:00",
+    "utc": "2026-11-04T04:26:53Z",
     "timezone": "America/Sao_Paulo"
   },
   "document_history": {
@@ -43,10 +43,82 @@
           "docs/F0-upstream-identity.md": "11349f234f8cd1cc572c4a30e285d8b386a1c4d98140eb41428e0fcdf338d322",
           "governance/F0-sdp-snapshot.json": "245e06549477513f60a281706551724a00a93d01b4c544371721098bb01c9f68"
         }
+      },
+      {
+        "baseline": "F0-R1B pre-F0-R1D",
+        "hash_algorithm": "SHA-256",
+        "hashes": {
+          "README.md": "91fa60683fdfdf827724e7fe5e6141f8cf492a0d44517fd01ea54f9df4652dd7",
+          "docs/F0-acceptance-matrix.md": "d1c127b952f4569bad7b7cbc8c74bbf957516a47c5e4a7a8d7833d6c3e6af38b",
+          "docs/F0-dependency-coverage-matrix.md": "37beee46224a2469b360e39fa061316d40c0ce709f43f616ad59a18c7b7982c8",
+          "docs/F0-independent-comparison-plan.md": "ab80c2fdae90ecf3c022e247d6da71b2a433541fcc7a8c7b83cec3000278b2b5",
+          "docs/F0-native-sbom-mechanism.md": "7725681cd849a89d0ad9153fae406a7c9ac832371f4901c1dfa296db5190bac7",
+          "docs/F0-scope-and-boundaries.md": "a1c1678f7d5ed9c8a37dcda1508821d98519e3396c2efe48395362eef319a103",
+          "docs/F0-syft-execution-risk.md": "c6bb69fa28ae9d3e7c329a40c6c8cd5673773ff0d2af1a189425b66dc16ed631",
+          "docs/F0-upstream-identity.md": "db1bdc64dc2d84885cb73315f0372b564513d99740425220cb69b309a96199fa",
+          "governance/F0-sdp-snapshot.json": "1405b584bcc07995eb0ae590767e81245cdfb7c7f37220184d2a3a824b072714"
+        }
+      },
+      {
+        "baseline": "F0-R1D pre-English-migration",
+        "hash_algorithm": "SHA-256",
+        "hashes": {
+          "README.md": "f21ef9d51e9f97760d7653e83f35eab2aab025466f772d983232f93c1377c72e",
+          "docs/F0-acceptance-matrix.md": "22bbc53406c795dddc19c7b59e81e3563153788aca9b0748deb0f39b7151a718",
+          "docs/F0-dependency-coverage-matrix.md": "dff009454e14db776ef43ff0945c232c5d250898570301f372a1a73e8b3c3718",
+          "docs/F0-independent-comparison-plan.md": "ab80c2fdae90ecf3c022e247d6da71b2a433541fcc7a8c7b83cec3000278b2b5",
+          "docs/F0-native-sbom-mechanism.md": "834d654192d8003d16de14074ef2abefb325c05f46211ae6c0e62cfbac5d352e",
+          "docs/F0-scope-and-boundaries.md": "7afc936bf82195229378bdb4c0f32373498f8c7b124adeef4ea1dfbbca378752",
+          "docs/F0-syft-execution-risk.md": "c6bb69fa28ae9d3e7c329a40c6c8cd5673773ff0d2af1a189425b66dc16ed631",
+          "docs/F0-upstream-identity.md": "9c07f4f0c78275467295ba8955a86dc125b7b140528c5718edac8c5e306dc937",
+          "governance/F0-sdp-snapshot.json": "443cc5afade8a65e0bb5b8384d3083483b9cf56053902723410e5bc93b221d6d"
+        }
       }
     ]
   },
+  "documentation_language": "en",
+  "language_migration": {
+    "revision": "F0-R1D-EN",
+    "source_revision": "F0-R1D",
+    "source_revised_at": {
+      "local": "2026-11-04T01:07:03-03:00",
+      "utc": "2026-11-04T04:07:03Z",
+      "timezone": "America/Sao_Paulo"
+    },
+    "recorded_at": {
+      "local": "2026-11-04T01:26:53-03:00",
+      "utc": "2026-11-04T04:26:53Z",
+      "timezone": "America/Sao_Paulo"
+    },
+    "source_language": "pt-BR",
+    "target_language": "en",
+    "scope": [
+      "README.md",
+      "docs/F0-acceptance-matrix.md",
+      "docs/F0-dependency-coverage-matrix.md",
+      "docs/F0-independent-comparison-plan.md",
+      "docs/F0-native-sbom-mechanism.md",
+      "docs/F0-scope-and-boundaries.md",
+      "docs/F0-syft-execution-risk.md",
+      "docs/F0-upstream-identity.md"
+    ],
+    "translated_document_sha256": {
+      "README.md": "04f4d429452ef99f5bda03b3c1d4acdce11125f034ea2b74778d91d772f67c43",
+      "docs/F0-acceptance-matrix.md": "31508946b493f6ed04248331f00b931c78989e888be64c34995dc92e29214742",
+      "docs/F0-dependency-coverage-matrix.md": "7d42889ce4c25a436c919e50f2c38514505e234accf44c733853405e85b1ada9",
+      "docs/F0-independent-comparison-plan.md": "c49266a70842e5c8964eb90507577c81bd78b48e01ee3f872c0e8e6dac3ef5ff",
+      "docs/F0-native-sbom-mechanism.md": "9c95514f0409f51042bf6929bf735b8ac5a217fd155d424c6c60c1ad8813dd5e",
+      "docs/F0-scope-and-boundaries.md": "8ec0411c229b81c1805d3f4581ead318f2c2303ec65b2f061f927115ce589bf1",
+      "docs/F0-syft-execution-risk.md": "7406078c73d29796410d9dbf7ebb0fcf4c453cf8d5c0db10dfade1a2406dc4c4",
+      "docs/F0-upstream-identity.md": "fa2e521bea37a16db59832341a71625d881a28e964ae201e02485b3bbd6a76e1"
+    },
+    "scientific_state_changed": false,
+    "gate_state_changed": false,
+    "historical_hashes_preserved": true
+  },
   "evidence_bridge": {
+    "revision": "F0-R1B",
+    "historical": true,
     "package": ".artifacts/f0-r1b-evidence/FPRIME-SBOM-F0-R1B-EVIDENCE-v01",
     "schema": "FPRIME-SBOM-F0-R1B-EVIDENCE-v0.1",
     "manifest_sha256": "03247b5ee641ad3bd703c0a7de40008b48b6232197d35fd4f9b03a952e3572b7",
@@ -56,6 +128,33 @@
     "package_integrity": "PASS",
     "upstream_tree_binding": "BLOCKED",
     "cmake_call_chain": "PARTIAL"
+  },
+  "upstream_closure": {
+    "evidence_path": ".artifacts/f0-r1c-upstream-closure-v01",
+    "verification_mode": "OFFLINE_PHYSICAL_GIT_OBJECTS",
+    "origin_url": "https://github.com/nasa/fprime.git",
+    "commit": "a4b1b1c043d1f9b51a7faba4a47d5d0f231910c7",
+    "root_tree": "af4e2084aa84d51e82949c42f116d91301f65d81",
+    "git_fsck": "PASS_WITH_EXPECTED_UNBORN_HEAD_NOTICE",
+    "tracked_tree_entries": 3610,
+    "tracked_inventory_match": true,
+    "submodule_gitlinks": 1,
+    "submodules_traversed": false,
+    "search_scope": "superproject tracked tree at fixed commit; submodules excluded",
+    "literal_match_pattern": "target/sbom|sbom_add_|SBOM_DEPENDENCIES",
+    "literal_matches": 9,
+    "dynamic_dispatch_verified_separately": true,
+    "commit_signature_embedded": true,
+    "commit_signature_cryptographically_verified": false,
+    "evidence_sha256": {
+      "summary.txt": "b8cae020e4f4ce7fd6a32ff31b5ee88478ff139f9fdb5b59bc4bcbe104841660",
+      "commit-object-inspection.txt": "2ddbf3a770247ce6ca750d82730e142daeaa4a2fc034802263c2496faf427228",
+      "immutable-file-hashes.tsv": "2dce0a8de56ecae7d55df6b70df696c39ab3abe6ab7d22e43f40af5ea73063b2",
+      "callsite-inventory.txt": "77c64fa708b82981f7ecdf24a785f2da7ca5e6466051ec77489f6b7650a01ed7",
+      "tracked-tree-inventory.txt": "4197c4f2ca7408be8840e018e314102a24142f3e06ce1f0737eb386fa899b5b0",
+      "git-pack": "a9ebf2bb6c371bdd38d367b74ff260062d27d3eb57954e1c3a98a2ebfa21ba0d",
+      "git-pack-index": "0575cbaad29ac8292efac39c762d9d3afd09e2591060c3117a8a6e7586dd9c23"
+    }
   },
   "governance": {
     "sep": "BH-SEP v2.3",
@@ -79,19 +178,21 @@
     "repository": "https://github.com/nasa/fprime",
     "branch": "devel",
     "branch_is_moving": true,
-    "resolved_commit": null,
-    "identity_status": "BLOCKED",
+    "resolved_commit": "a4b1b1c043d1f9b51a7faba4a47d5d0f231910c7",
+    "resolved_tree": "af4e2084aa84d51e82949c42f116d91301f65d81",
+    "identity_status": "VERIFIED_OFFLINE",
     "external_candidate": {
-      "source_classification": "INDEPENDENT_EXTERNAL_REFERENCE",
+      "source_classification": "OFFLINE_PHYSICAL_GIT_OBJECT_EVIDENCE",
       "commit": "a4b1b1c043d1f9b51a7faba4a47d5d0f231910c7",
-      "locally_revalidated": false,
-      "commit_tree_path_blob_links_verified": false,
+      "locally_revalidated": true,
+      "commit_tree_path_blob_links_verified": true,
       "package_bytes_obtained": true,
       "package_hashes_locally_revalidated": true,
-      "immutable_upstream_provenance_verified": false,
+      "immutable_upstream_provenance_verified": true,
       "local_sha256_computed": true,
-      "call_sites_enumerated": false,
-      "tree_oids_from_manifest": {
+      "call_sites_enumerated": true,
+      "call_site_scope": "superproject tracked tree; submodules excluded",
+      "verified_tree_oids": {
         "commit_tree": "af4e2084aa84d51e82949c42f116d91301f65d81",
         "cmake": "a797dc6a45b87ac68df5c7b41414f698648129f2",
         "cmake_target": "3c01c08050a493c47ad67c823ebdf4f9baf37347",
@@ -100,50 +201,67 @@
       "blobs": {
         "cmake/target/sbom.cmake": "f298b0f19dc2c5febcb9d9f72f474e2b2561b1b3",
         "cmake/target/tools/redirector.py": "e92f70416a0ec6fe0da933a1cf698af66a8e3808",
-        "cmake/target/install.cmake": "a0e14e139927c0ea125cd67134b79a460959d71b"
+        "cmake/target/install.cmake": "a0e14e139927c0ea125cd67134b79a460959d71b",
+        "cmake/FPrime.cmake": "762cdbdafd24cbb748c70b8600a1498eb8e0dc56",
+        "cmake/target/target.cmake": "006218f8a6a454f96a1a8e50457a60223ebfea22"
       }
     },
     "provided_prior_blob_sha": "f298b0f19dc2c5febcb9d9f72f474e2b2561b1b3",
     "provided_prior_blob_sha_revalidated": true,
-    "provided_prior_blob_sha_revalidation_scope": "Matches locally transported package bytes; upstream tree binding remains unverified.",
+    "provided_prior_blob_sha_revalidation_scope": "Matches local bytes and the blob bound to cmake/target/sbom.cmake by the verified commit tree.",
     "inspected_files": [
       {
         "path": "cmake/target/sbom.cmake",
         "url": "https://github.com/nasa/fprime/blob/a4b1b1c043d1f9b51a7faba4a47d5d0f231910c7/cmake/target/sbom.cmake",
         "git_blob_oid_sha1": "f298b0f19dc2c5febcb9d9f72f474e2b2561b1b3",
         "sha256": "aa720bb92c6f3a4525770b59a0c35830d35975f49b9cbb38096669c2643b9eae",
-        "status": "PACKAGE_BYTES_VERIFIED_UPSTREAM_TREE_BINDING_UNVERIFIED"
+        "status": "GIT_TREE_BOUND_AND_SHA256_VERIFIED"
       },
       {
         "path": "cmake/target/tools/redirector.py",
         "url": "https://github.com/nasa/fprime/blob/a4b1b1c043d1f9b51a7faba4a47d5d0f231910c7/cmake/target/tools/redirector.py",
         "git_blob_oid_sha1": "e92f70416a0ec6fe0da933a1cf698af66a8e3808",
         "sha256": "a8ae0dd04044739643fd9f5f96e45dfe1f0a23e7a5fc3bf31f33b74bda5353a4",
-        "status": "PACKAGE_BYTES_VERIFIED_UPSTREAM_TREE_BINDING_UNVERIFIED"
+        "status": "GIT_TREE_BOUND_AND_SHA256_VERIFIED"
       },
       {
         "path": "cmake/target/install.cmake",
         "url": "https://github.com/nasa/fprime/blob/a4b1b1c043d1f9b51a7faba4a47d5d0f231910c7/cmake/target/install.cmake",
         "git_blob_oid_sha1": "a0e14e139927c0ea125cd67134b79a460959d71b",
         "sha256": "279c06cf3682ee0374dc89b496c014a4af816baac8993cec04cce6066c31df43",
-        "status": "PACKAGE_BYTES_VERIFIED_UPSTREAM_TREE_BINDING_UNVERIFIED"
+        "status": "GIT_TREE_BOUND_AND_SHA256_VERIFIED"
+      },
+      {
+        "path": "cmake/FPrime.cmake",
+        "url": "https://github.com/nasa/fprime/blob/a4b1b1c043d1f9b51a7faba4a47d5d0f231910c7/cmake/FPrime.cmake",
+        "git_blob_oid_sha1": "762cdbdafd24cbb748c70b8600a1498eb8e0dc56",
+        "sha256": "f63058c664e9e1741bfd429185e07e784c5124e9b8d97da7e8a260b3cce0126d",
+        "status": "GIT_TREE_BOUND_AND_SHA256_VERIFIED"
+      },
+      {
+        "path": "cmake/target/target.cmake",
+        "url": "https://github.com/nasa/fprime/blob/a4b1b1c043d1f9b51a7faba4a47d5d0f231910c7/cmake/target/target.cmake",
+        "git_blob_oid_sha1": "006218f8a6a454f96a1a8e50457a60223ebfea22",
+        "sha256": "de8e57b54cec8b3d7f34d6754e3d825c8f437c79a1fb75382c78323ba8a9c294",
+        "status": "GIT_TREE_BOUND_AND_SHA256_VERIFIED"
       }
     ]
   },
   "evidence": {
     "static_mechanism_observed": true,
     "package_file_hashes_verified": true,
-    "upstream_tree_bindings_verified": false,
-    "complete_call_sites_verified": false,
-    "upstream_file_hashes_verified": false,
+    "upstream_tree_bindings_verified": true,
+    "complete_call_sites_verified": true,
+    "call_site_verification_scope": "superproject tracked tree; submodules excluded",
+    "upstream_file_hashes_verified": true,
     "release_binding_observed": false,
     "official_release_sbom_existential_claim": "NOT_MADE",
     "vulnerability_claims": []
   },
   "acceptance": {
     "F0-01_workspace": "PASS",
-    "F0-02_upstream_identity": "BLOCKED",
-    "F0-03_native_mechanism": "PARTIAL",
+    "F0-02_upstream_identity": "PASS",
+    "F0-03_native_mechanism": "PASS",
     "F0-04_execution_risk": "PASS",
     "F0-05_coverage_matrix": "PASS",
     "F0-06_comparison_plan": "PASS",
@@ -151,16 +269,16 @@
     "F0-08_snapshot_consistency": "PASS"
   },
   "gates": {
-    "F0_DOCUMENTATION_GREEN": "BLOCKED",
+    "F0_DOCUMENTATION_GREEN": "PASS",
     "SBOM_GENERATION_GREEN": "NÃO_EXECUTADO",
     "SECURITY_QUALIFICATION_GREEN": "NÃO_EXECUTADO",
     "GLOBAL_GREEN": "NOT_DECLARED"
   },
-  "blockers": [
-    "The externally supplied commit was not revalidated against refs/heads/devel using an official live endpoint.",
-    "Commit-to-tree-to-path-to-blob links were not verified from self-contained tree objects or an available official endpoint.",
-    "cmake/FPrime.cmake and cmake/target/target.cmake bytes were not included in the evidence package.",
-    "Complete sbom_add_* call-site enumeration was not frozen to the candidate commit."
+  "blockers": [],
+  "preserved_limits": [
+    "Call-site enumeration covers the tracked superproject tree and excludes submodule contents.",
+    "No SBOM generation, build, dependency installation, or upstream script execution occurred.",
+    "No release signature, published official SBOM, or security qualification was established."
   ],
-  "next_recommended_step": "Acquire or verify official commit/tree objects for the candidate revision, include immutable cmake/FPrime.cmake and cmake/target/target.cmake bytes, and perform an exhaustive read-only sbom_add_* call-site enumeration without executing upstream code."
+  "next_recommended_step": "If separately authorized, define an isolated F1 execution baseline with pinned Syft/CMake/Python versions; F0 itself is documentarily complete."
 }

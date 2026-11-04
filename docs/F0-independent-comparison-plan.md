@@ -1,55 +1,55 @@
-# F0 — Plano de comparação independente
+# F0 — Independent comparison plan
 
-## Estado
+## Status
 
 `PLAN_ONLY — NOT_AUTHORIZED_FOR_EXECUTION`
 
-O objetivo futuro é comparar o mecanismo nativo a uma enumeração independente sem tratar concordância como prova automática de completude.
+The future objective is to compare the native mechanism with an independent enumeration without treating agreement as automatic proof of completeness.
 
-## Pré-condições obrigatórias
+## Mandatory preconditions
 
-1. Autorização explícita para uma nova fase executável.
-2. Commit completo do F´ congelado e arquivos obtidos por URLs imutáveis.
-3. Hashes verificados do source, submódulos, ferramentas e configurações.
-4. Syft, Python e CMake pinados, ambiente sem rede e workspace descartável.
-5. Deployment, plataforma/toolchain e configuração de build definidos antes da coleta.
-6. Critérios de aceitação aprovados sem alterar o upstream.
+1. Explicit authorization for a new executable phase.
+2. Full F´ commit frozen and files obtained through immutable URLs.
+3. Verified hashes for source, submodules, tools, and configurations.
+4. Pinned Syft, Python, and CMake; network-disabled environment; disposable workspace.
+5. Deployment, platform/toolchain, and build configuration defined before collection.
+6. Acceptance criteria approved without modifying upstream.
 
-## Conjuntos a comparar
+## Sets to compare
 
-| Conjunto | Produção futura | Finalidade |
+| Set | Future production | Purpose |
 |---|---|---|
-| NATIVE-SOURCE | target nativo F´ no ambiente isolado | observar resultado efetivo do mecanismo |
-| DIRECT-SOURCE | mesma versão Syft e argv equivalente, invocação controlada | separar efeitos do wrapper/CMake |
-| MANIFEST-LEDGER | parsing somente leitura dos manifests/locks no commit | inventário independente de declarações |
-| BUILD-GRAPH | CMake File API/metadata gerada em build autorizado | targets e dependências do build |
-| ARTIFACT-SCAN | Syft sobre install tree/artefato final, se aprovado | medir diferença source versus produto |
-| LINKAGE | link maps e dependências dinâmicas do artefato, se aplicável | bibliotecas realmente ligadas |
-| OFFICIAL | eventual artefato publicado pela NASA e autenticado | comparar apenas se sua existência/proveniência for verificada |
+| NATIVE-SOURCE | native F´ target in the isolated environment | observe the mechanism's effective result |
+| DIRECT-SOURCE | same Syft version and equivalent argv, controlled invocation | separate wrapper/CMake effects |
+| MANIFEST-LEDGER | read-only parsing of manifests/locks at the commit | independent inventory of declarations |
+| BUILD-GRAPH | CMake File API/metadata generated in an authorized build | build targets and dependencies |
+| ARTIFACT-SCAN | Syft against install tree/final artifact, if approved | measure source-versus-product difference |
+| LINKAGE | link maps and dynamic dependencies of the artifact, if applicable | libraries actually linked |
+| OFFICIAL | any authenticated artifact published by NASA | compare only if its existence/provenance is verified |
 
-## Normalização
+## Normalization
 
-- Preservar os originais e trabalhar sobre cópias normalizadas.
-- Registrar schema/versão; não converter silenciosamente entre formatos.
-- Normalizar identificadores por PURL/CPE/ecossistema, nome, versão e origem, preservando colisões.
-- Separar timestamps/IDs aleatórios de diferenças semânticas.
-- Não equiparar dependência declarada, resolvida, construída, ligada e distribuída.
-- Classificar cada diferença como explicação confirmada, hipótese ou desconhecida.
+- Preserve originals and work on normalized copies.
+- Record schema/version; do not silently convert between formats.
+- Normalize identifiers by PURL/CPE/ecosystem, name, version, and origin while preserving collisions.
+- Separate timestamp/random-ID differences from semantic differences.
+- Do not equate declared, resolved, built, linked, and distributed dependencies.
+- Classify each difference as a confirmed explanation, hypothesis, or unknown.
 
-## Comparações e métricas
+## Comparisons and metrics
 
-1. Reprodutibilidade byte a byte e semântica em duas execuções idênticas.
-2. Componentes somente em cada conjunto e interseções por classe.
-3. Versões, hashes, licenças, supplier, PURL/CPE e relações ausentes.
-4. Cobertura por deployment, plataforma, build configuration e artefato.
-5. Presença de commit/release e evidãncia criptográfica da associação.
-6. Efeito da exclusão `.github` e de submódulos inicializados/não inicializados.
-7. Diferença entre pacote detectado e arquivo meramente presente.
+1. Byte-for-byte and semantic reproducibility across two identical runs.
+2. Components found only in each set and intersections by class.
+3. Missing versions, hashes, licenses, supplier, PURL/CPE, and relationships.
+4. Coverage by deployment, platform, build configuration, and artifact.
+5. Presence of commit/release identity and cryptographic evidence of the association.
+6. Effect of the `.github` exclusion and initialized/uninitialized submodules.
+7. Difference between a detected package and a merely present file.
 
-## Critérios de parada
+## Stop criteria
 
-Parar e registrar `BLOCKED` se identidade, hashes, isolamento de rede, pin de ferramentas ou proveniência dos resultados não puderem ser demonstrados. Falha ou divergência não autoriza ajuste ad hoc do source nem instalação de ferramentas fora do procedimento aprovado.
+Stop and record `BLOCKED` if identity, hashes, network isolation, tool pinning, or result provenance cannot be demonstrated. Failure or divergence does not authorize ad hoc source changes or tool installation outside the approved procedure.
 
-## Saídas futuras esperadas
+## Expected future outputs
 
-Manifest de inputs, log de ambiente sanitizado, comandos, hashes de resultados originais, relatório de normalização, diff classificado e decisão separada para geração e qualificação. Este plano não estabelece que qualquer uma dessas saídas exista hoje.
+Input manifest, sanitized environment log, commands, hashes of original results, normalization report, classified diff, and separate decisions for generation and qualification. This plan does not establish that any of those outputs exists today.

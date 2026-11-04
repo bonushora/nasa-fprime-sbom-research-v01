@@ -1,45 +1,49 @@
-# F0 — Escopo e fronteiras
+# F0 — Scope and boundaries
 
-## Mandato
+## Mandate
 
-Esta fase materializa somente documentação local e análise estática. A governança declarada é BH-SEP v2.3 / BH-SDP v2.3, com autorização `APPROVED — DOCUMENTATION_AND_READ_ONLY`, risco `LOW` e estado inicial `NOT_QUALIFIED`.
+This phase materializes local documentation and static analysis only. The declared governance is BH-SEP v2.3 / BH-SDP v2.3, with authorization `APPROVED — DOCUMENTATION_AND_READ_ONLY`, risk `LOW`, and initial state `NOT_QUALIFIED`.
 
-Workspace autorizado:
+Authorized workspace:
 
 `/home/usuario/Desenvolvimento/bonushora/nasa-fprime-sbom-research-v01`
 
-## Dentro do escopo
+## In scope
 
-- Leitura de fontes públicas oficiais do repositório `nasa/fprime`.
-- Inspeção estática de `cmake/target/sbom.cmake`, `redirector.py` e contexto CMake diretamente relevante.
-- Registro de identidade, proveniência, riscos, cobertura conhecida e lacunas.
-- Criação e validação sintática dos documentos F0 neste workspace.
-- Comandos locais somente de leitura, data/hora, hashes e validação documental.
+- Reading official public sources from the `nasa/fprime` repository.
+- Static inspection of `cmake/target/sbom.cmake`, `redirector.py`, and directly relevant CMake context.
+- Recording identity, provenance, risks, known coverage, and gaps.
+- Creating and syntactically validating the F0 documents in this workspace.
+- Local commands limited to read-only inspection, date/time, hashing, and documentary validation.
 
-## Fora do escopo e não executado
+## Out of scope and not executed
 
-- Build, configuração CMake do upstream, geração de SBOM ou execução de Syft.
-- Execução de Python, CMake, testes ou qualquer script obtido do upstream.
-- Instalação ou atualização de dependências.
-- Clone, checkout ou modificação do NASA F´.
-- Acesso ou modificação da pesquisa NASA cFS.
-- Push, PR, discussão, publicação ou repositório remoto.
-- Avaliação de vulnerabilidades, exploração ou qualificação de segurança.
-- Afirmação de que existe um SBOM oficial de release do F´.
+- Build, upstream CMake configuration, SBOM generation, or Syft execution.
+- Execution of Python, CMake, tests, or any script obtained from upstream.
+- Dependency installation or update.
+- Cloning, checking out, or modifying NASA F´.
+- Accessing or modifying the NASA cFS research project.
+- Push, pull request, discussion, publication, or remote repository creation.
+- Vulnerability assessment, exploitation, or security qualification.
+- Any assertion that an official F´ release SBOM exists.
 
-## Fronteira de evidência
+## Evidence boundary
 
-As páginas oficiais acessíveis foram servidas por um canal de leitura com cache. A página de `sbom.cmake` indicou 53 linhas e a de `redirector.py`, 8 linhas. A identidade da branch não foi resolvida para um commit completo. Por isso:
+The accessible official pages were served through a cached read channel. The `sbom.cmake` page indicated 53 lines and the `redirector.py` page 8 lines. The branch identity could not be resolved to a full commit. Therefore:
 
-1. o conteúdo é evidência de um mecanismo observado na referência móvel;
-2. não é evidência de uma baseline imutável;
-3. hashes upstream ausentes permanecem `UNKNOWN`;
-4. o SHA `f298b0f19dc2c5febcb9d9f72f474e2b2561b1b3` é registrado apenas como blob anteriormente observado e fornecido no mandato, não como commit nem como valor revalidado nesta sessão.
+1. the content is evidence of a mechanism observed at the moving reference;
+2. it is not evidence of an immutable baseline;
+3. absent upstream hashes remain `UNKNOWN`;
+4. SHA `f298b0f19dc2c5febcb9d9f72f474e2b2561b1b3` is recorded only as a previously observed blob supplied in the mandate, not as a commit or as a value revalidated in that session.
 
-### Atualização F0-R1B
+### F0-R1B update
 
-O evidence bridge local permitiu revalidar os bytes transportados contra os três Git blob OIDs e SHA-256 declarados. Esta verificação substitui `UNKNOWN` somente para a integridade interna dos arquivos do pacote. Ela não demonstra, por si só, que o commit/tree oficial associa aqueles blobs aos caminhos declarados: os objetos tree e uma resposta oficial autenticada não fazem parte do pacote. A classificação da proveniência upstream permanece `BLOCKED`, e a cadeia de registro CMake permanece `PARTIAL` porque dois arquivos citados pelo manifesto não foram transportados.
+The local evidence bridge made it possible to revalidate the transported bytes against the three declared Git blob OIDs and SHA-256 values. This verification replaces `UNKNOWN` only for the internal integrity of the package files. By itself, it does not demonstrate that the official commit/tree associates those blobs with the declared paths: the tree objects and an authenticated official response are not part of the package. Upstream provenance remained `BLOCKED`, and the CMake registration chain remained `PARTIAL` because two files cited by the manifest were not transported.
 
-## Regras para fases futuras
+### F0-R1D closure
 
-Qualquer fase executável exige autorização nova e explícita. O plano futuro não concede permissão para executar as ações que descreve.
+The R1C runner provided a physical shallow Git repository containing the fixed commit and tree. Offline validation traversed all 3,610 tracked entries in the superproject, confirmed five paths with `git ls-tree`, compared bytes from the pack with the transported copies, and reproduced the nine matches. There is one gitlink, `googletest`; its contents were neither traversed nor included in the completeness claim. Identity and the CMake chain are therefore closed within the explicit boundary “tracked superproject tree, excluding submodules.”
+
+## Rules for future phases
+
+Any executable phase requires new, explicit authorization. The future plan does not grant permission to execute the actions it describes.

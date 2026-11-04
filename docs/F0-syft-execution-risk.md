@@ -1,66 +1,66 @@
-# F0 — Risco de execução Syft
+# F0 — Syft execution risk
 
-## Classificação desta fase
+## Phase classification
 
 `EXECUTION=NOT_AUTHORIZED_AND_NOT_EXECUTED`
 
-Esta é uma análise de superfície de efeitos, não uma constatação de vulnerabilidade.
+This is an analysis of the effect surface, not a finding of vulnerability.
 
-## Ferramentas e efeitos observados
+## Observed tools and effects
 
-| Componente | Ação | Efeito potencial |
+| Component | Action | Potential effect |
 |---|---|---|
-| CMake | resolve `syft` por `PATH` | comportamento depende do host e do binário encontrado |
-| Python | executa `redirector.py` | abre/trunca o JSON de saída |
-| `redirector.py` | chama argv com `subprocess.run` | executa Syft sem shell; propaga o return code; stderr permanece externo |
-| Syft | cataloga `dir:${FPRIME_PROJECT_ROOT}` | leitura recursiva do projeto e interpretação de manifests/artefatos |
-| CMake install | instala o componente após o target | escrita/cópia no destino de instalação configurado |
+| CMake | resolves `syft` through `PATH` | behavior depends on the host and the binary found |
+| Python | executes `redirector.py` | opens/truncates the output JSON |
+| `redirector.py` | invokes argv with `subprocess.run` | executes Syft without a shell; propagates the return code; stderr remains external |
+| Syft | catalogs `dir:${FPRIME_PROJECT_ROOT}` | recursively reads the project and interprets manifests/artifacts |
+| CMake install | installs the component after the target | writes/copies to the configured installation destination |
 
-## Dependências e variabilidade do host
+## Host dependencies and variability
 
-- Executáveis CMake, Python e Syft, todos com versão e hash não fixados no trecho observado.
-- `PATH`, variáveis CMake, permissões, locale, timezone, filesystem e links simbólicos.
-- Configuração, variáveis de ambiente, cache e diretórios locais que Syft possa descobrir.
-- Conteúdo e estado de inicialização de submódulos na raiz varrida.
-- Conjunto de catalogadores e versão do formato associados à versão de Syft encontrada.
+- CMake, Python, and Syft executables, all with versions and hashes unpinned in the observed excerpt.
+- `PATH`, CMake variables, permissions, locale, timezone, filesystem, and symbolic links.
+- Configuration, environment variables, cache, and local directories that Syft may discover.
+- The content and initialization state of submodules under the scanned root.
+- The cataloger set and format version associated with the Syft version found.
 
-A referência oficial atual do Syft documenta configurações para verificação de atualização, consultas remotas opcionais de ecossistemas e cache local; o comando F´ observado não fixa esses controles. Consulte [Syft Configuration Reference](https://oss.anchore.com/docs/reference/syft/configuration/) e [Supported Sources](https://github.com/anchore/syft/wiki/supported-sources).
+The current official Syft reference documents settings for update checks, optional remote ecosystem queries, and local caching; the observed F´ command does not pin those controls. See the [Syft Configuration Reference](https://oss.anchore.com/docs/reference/syft/configuration/) and [Supported Sources](https://github.com/anchore/syft/wiki/supported-sources).
 
-## Efeitos colaterais possíveis
+## Possible side effects
 
-1. Criação ou truncamento do JSON no build tree, inclusive em falha de Syft.
-2. Escrita da cópia instalada sob o destino configurado pelo F´.
-3. Leitura ampla de todos os caminhos alcançados sob a raiz, exceto exclusões efetivas.
-4. Leitura de configuração e caches do usuário; possível escrita de cache, conforme versão/configuração.
-5. Tráfego de rede para update check ou enriquecimento remoto quando habilitado pela versão/configuração.
-6. Uso de CPU, memória e I/O proporcional ao conteúdo varrido.
-7. Mudança silenciosa de comportamento quando `syft` aparece ou desaparece do `PATH`, porque o target é condicional e integra `ALL`.
+1. Creation or truncation of the JSON in the build tree, including when Syft fails.
+2. Writing the installed copy under the destination configured by F´.
+3. Broad reading of all reachable paths under the root, subject to effective exclusions.
+4. Reading user configuration and caches; possible cache writes, depending on version/configuration.
+5. Network traffic for update checks or remote enrichment when enabled by the version/configuration.
+6. CPU, memory, and I/O use proportional to the scanned content.
+7. Silent behavior changes when `syft` appears in or disappears from `PATH`, because the target is conditional and participates in `ALL`.
 
-Os itens 4 e 5 são possibilidades dependentes de versão/configuração, não efeitos observados em execução nesta pesquisa.
+Items 4 and 5 are version/configuration-dependent possibilities, not effects observed during execution in this research.
 
-## Limites de cobertura e confiança
+## Coverage and confidence limits
 
-- A origem é uma árvore de diretório, não a instalação final nem uma imagem executável.
-- Syft identifica pacotes por catalogadores e evidências reconhecidas; isso não equivale a enumerar todo arquivo fonte ou todo target CMake.
-- O grafo de link do compilador e os parâmetros `DEPENDENCIES`/`FULL_DEPENDENCIES` não são entregues ao comando Syft observado.
-- Dependências ausentes da árvore, código gerado fora dela e componentes do host/toolchain podem ficar fora.
-- `spdx-json` sem versão explícita pode mudar de schema/default entre versões de Syft. A documentação oficial confirma que formatos padrão podem omitir ou transformar dados presentes no formato nativo: [Output Formats](https://oss.anchore.com/docs/guides/sbom/formats/).
+- The source is a directory tree, not the final installation or an executable image.
+- Syft identifies packages through catalogers and recognized evidence; this is not equivalent to enumerating every source file or every CMake target.
+- The compiler link graph and the `DEPENDENCIES`/`FULL_DEPENDENCIES` parameters are not provided to the observed Syft command.
+- Dependencies absent from the tree, code generated outside it, and host/toolchain components may be omitted.
+- `spdx-json` without an explicit version may change schema/defaults between Syft versions. The official documentation confirms that standard formats may omit or transform data available in the native format: [Output Formats](https://oss.anchore.com/docs/guides/sbom/formats/).
 
-## Condições mínimas para futura execução isolada
+## Minimum conditions for future isolated execution
 
-Somente após nova autorização:
+Only after new authorization:
 
-- congelar o commit upstream e verificar hashes de todos os inputs;
-- fixar versão e SHA-256 do binário Syft, Python e CMake usados;
-- usar source read-only e build/install/cache efêmeros em diretório dedicado;
-- negar rede por mecanismo externo e desabilitar explicitamente update/enriquecimento remoto;
-- fornecer HOME/config/cache controlados e ambiente mínimo, sem credenciais;
-- usar `PATH` fechado e registrar argv e versões sem executar wrappers não revisados;
-- limitar CPU, memória, I/O, tempo e espaço em disco;
-- registrar árvore de inputs, estado de submódulos, toolchain, plataforma e deployment;
-- validar JSON/schema e usar publicação atômica somente após return code zero;
-- comparar hashes e resultados em pelo menos duas execuções idênticas antes de alegar reprodutibilidade.
+- freeze the upstream commit and verify hashes for all inputs;
+- pin the versions and SHA-256 values of the Syft, Python, and CMake binaries used;
+- use a read-only source and ephemeral build/install/cache locations in a dedicated directory;
+- deny network access through an external mechanism and explicitly disable update/remote-enrichment behavior;
+- provide controlled HOME/config/cache locations and a minimal environment without credentials;
+- use a closed `PATH` and record argv and versions without executing unreviewed wrappers;
+- bound CPU, memory, I/O, time, and disk space;
+- record the input tree, submodule state, toolchain, platform, and deployment;
+- validate the JSON/schema and publish atomically only after a zero return code;
+- compare hashes and results from at least two identical runs before claiming reproducibility.
 
-## Build-generated versus oficial publicado
+## Build-generated versus officially published
 
-Um SBOM gerado pelo build é um resultado local do source tree, ferramentas e configuração daquele host. Um eventual SBOM oficial publicado precisaria ser associado pelo publicador a uma release, ter proveniência, canal, checksums/assinaturas e política de geração verificáveis. Esta F0 não estabeleceu que a NASA publique tal artefato e não trata um resultado local como oficial.
+A build-generated SBOM is a local result of the source tree, tools, and configuration on that host. Any officially published SBOM would need to be associated by its publisher with a release and have verifiable provenance, channel, checksums/signatures, and generation policy. This F0 did not establish that NASA publishes such an artifact and does not treat a local result as official.
