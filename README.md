@@ -39,3 +39,11 @@ This experiment does not establish dependency completeness, ecosystem-disambigua
 
 The package is local and unpublished. No push, release, DOI, Zenodo deposit, ORCID mutation, or institutional contact was performed.
 
+
+## Post-publication provenance addendum
+
+The following supplementary evidence was added after the frozen v0.2 publication:
+
+- [F Prime Discussion #6311 — bilingual provenance](docs/provenance/fprime-maintainer-dialogue-v01/README.md)
+
+This records a maintainer's technical clarification, not a review or endorsement of the research.
